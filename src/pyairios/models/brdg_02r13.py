@@ -658,9 +658,9 @@ class BRDG02R13(AiriosNode):
             rf_load_current_hour=await _safe_fetch(self.rf_load_current_hour),
             power_on_time=await _safe_fetch(self.power_on_time),
             # add info from ALL definitions in models/
-            models=await self.models(),
-            model_descriptions=await self.model_descriptions(),
-            product_ids=await self.product_ids(),
+            # models=await self.models(),
+            # model_descriptions=await self.model_descriptions(),
+            # product_ids=await self.product_ids(),
         )
 
     async def print_data(self) -> None:
@@ -694,12 +694,3 @@ class BRDG02R13(AiriosNode):
         print(f"    {'RF load current hour:': <40}{res['rf_load_current_hour']}")
         print(f"    {'Uptime:': <40}{res['power_on_time']}")
         print("")
-
-        amount = 0 if res["models"] is None else len(res["models"])
-        print(f"Loaded {amount} model files")
-        if res["models"] is not None:
-            for key, mod in res["models"].items():
-                print(
-                    f"    {key[:3]}{':': <37}{key} {str(mod.Node)} {mod.product_descr} {mod.pr_id}"
-                )
-        # print(f"    {'ProductIDs:': <40}{res['product_ids']}")
